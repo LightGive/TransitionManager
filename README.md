@@ -1,5 +1,5 @@
 # TransitionManager
-UnityのUIを使用したシーン遷移のマネージャー。
+UnityのUIを使用したシーン遷移のマネージャー<br>
 
 
 ## 使い方
