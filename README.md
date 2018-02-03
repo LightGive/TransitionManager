@@ -1,4 +1,4 @@
-# TransitionManager
+# TransitionManager[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 UnityのUIを使用したシーン遷移のマネージャー<br>
 
 ## 使い方
