@@ -5,5 +5,5 @@ UnityのUIを使用したシーン遷移のマネージャー<br>
 シーン上にこのスクリプトを付けたGameObjectを配置して、  
 TransitionManager.Instance.LoadLevel()を呼ぶとシーンが遷移します。
 
-##License
-See this 
+## License
+See LICENSE
