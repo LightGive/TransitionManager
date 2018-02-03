@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using LightGive
-
-#if UNITY_5_3
-
-//Application.LoadLevelの代わりに使用
 using UnityEngine.SceneManagement;
-
-#endif
 
 /// <summary>
 /// UnityのUIを使ったシーン遷移
 /// フェードもあり。
 /// </summary>
-public class TransitionManager : SingletonMonoBehaviour<TransitionManager>
+public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionManager>
 {
 	private const float DEFAULT_TRANS_TIME = 1.0f;
 
