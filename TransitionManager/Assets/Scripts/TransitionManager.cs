@@ -9,68 +9,62 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionManager>
 {
-	private const float DEFAULT_TRANS_TIME = 1.0f;
+    public enum TransitionType
+    {
+        Fade,
 
-	public float transitionTime = 0.0f;
-	public Color transitionColor = Color.black;
+        Horizontal_Right,
+        Horizontal_Left,
+
+        Vertical_Top,
+        Vertical_Bottom,
+
+        Radial90_TopRight,
+        Radial90_TopLeft,
+        Radial90_BottomRight,
+        Radial90_BottomLeft,
+
+        Radial180_Right,
+        Radial180_Left,
+        Radial180_Top,
+        Radial180_Bottom,
+
+        Radial360_Right,
+        Radial360_Left,
+        Radial360_Top,
+        Radial360_Bottom,
+    }
+
+
+    [SerializeField]
+    private float defaultTime = 1.0f;
+    [SerializeField]
+    private Color transitionColor = Color.black;
+    [SerializeField]
+    private TransitionType transitionType;
 
 	private float transTimeCnt = 0.0f;
 	private bool isTransition = false;
-
 	private RectTransform transImageRectTransfrm;
 	private GameObject transImageObj;
 	private Texture2D transTexture;
 	private Sprite transSprite;
 	private Image transImage;
-	
 	private CanvasScaler fadeCancasScaler;
 	private Canvas fadeCanvas;
 
-	public TransitionType transitionType;
-	public enum TransitionType
+
+    protected override void Awake()
 	{
-		Fade,
-
-		Horizontal_Right,
-		Horizontal_Left,
-
-		Vertical_Top,
-		Vertical_Bottom,
-
-		Radial90_TopRight,
-		Radial90_TopLeft,
-		Radial90_BottomRight,
-		Radial90_BottomLeft,
-
-		Radial180_Right,
-		Radial180_Left,
-		Radial180_Top,
-		Radial180_Bottom,
-
-		Radial360_Right,
-		Radial360_Left,
-		Radial360_Top,
-		Radial360_Bottom,
-	}
-
-	void Awake()
-	{
-		if (this != Instance)
-		{
-			Destroy(this.gameObject);
-			return;
-		}
-
+        base.Awake();
 		Init();
-		DontDestroyOnLoad(this.gameObject);
-
 	}
 
 
 	void Init()
 	{
-		if (transitionTime <= 0.0f)
-			transitionTime = DEFAULT_TRANS_TIME;
+		if (defaultTime <= 0.0f)
+			defaultTime = 0.0f;
 
 		if (this.gameObject.GetComponent<Canvas>() != null)
 			fadeCanvas = this.gameObject.GetComponent<Canvas>();
