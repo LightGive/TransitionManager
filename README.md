@@ -9,5 +9,5 @@ TransitionManager.Instance.LoadLevel()を呼ぶとシーンが遷移します。
 Unity 2017.3.0f3<br>
 
 ## License
-See [LICENSE](/LICENSE.md).
+See [LICENSE](/LICENSE).
 
