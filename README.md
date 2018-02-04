@@ -18,6 +18,7 @@ ImageのImageTypeを変えて色んな遷移方法を実装しています。<br
 
 ### SettingInspector 
 | Property | Description |
+|:---|:---|
 | TransitionTime | シーンの遷移時間 |
 | TransitionColor | シーン遷移時の背景の色 |
 | TransitionType | シーン遷移の方法 |
