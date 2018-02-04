@@ -1,8 +1,8 @@
 # TransitionManager　[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 UnityのUIを使用したシーン遷移のマネージャー<br>
 <img src="https://78.media.tumblr.com/14349e6ca31f887e7d8a84703312cdbe/tumblr_p3lwx73LWQ1u4382eo1_1280.gif" alt="シーン遷移サンプル1" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/14349e6ca31f887e7d8a84703312cdbe/tumblr_p3lwx73LWQ1u4382eo1_1280.gif" alt="シーン遷移サンプル1" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/14349e6ca31f887e7d8a84703312cdbe/tumblr_p3lwx73LWQ1u4382eo1_1280.gif" alt="シーン遷移サンプル1" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/ef5c3f6ff4c17df92d8bf2ad35cd0467/tumblr_p3lwxkHmiE1u4382eo1_1280.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/1eacd7ba93eaa2ce63350978cff9d7bc/tumblr_p3lwxvaRZW1u4382eo1_1280.gif" alt="シーン遷移サンプル3" title="サンプル"><br>
 
 ## 使い方
 シーン上にこのスクリプトを付けたGameObjectを配置して、  
