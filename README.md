@@ -1,6 +1,6 @@
 # TransitionManager [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)<br>
-UnityのUIを使用したシーン遷移のマネージャー。<br>
-ImageのImageTypeを変えて色んな遷移方法を実装しています。<br>
+UnityのUIを使用したシーン遷移のマネージャー<br>
+ImageのImageTypeを変えて色んな遷移方法を実装しています<br>
 
 
 ## シーン遷移のサンプル <br>
