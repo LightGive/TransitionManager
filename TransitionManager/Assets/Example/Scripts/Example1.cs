@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class Example1 : MonoBehaviour
 {
-	void Start ()
-    {
-		
-	}
-	
-	void Update ()
-    {
-		
-	}
+    [SerializeField]
+    private string sceneName;
 
     public void OnButtonDown()
     {
-        TransitionManager.Instance.LoadLevel("Example2", 1.0f, TransitionManager.TransitionType.Radial180_Bottom, Color.red);
+        TransitionManager.Instance.LoadLevel(sceneName, 1.0f);
     }
 }
