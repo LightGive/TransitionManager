@@ -13,7 +13,6 @@ UnityのUIを使用したシーン遷移のマネージャー<br>
 1. Create gameObject.<br>
 2. Add component "TransitionManager".<br>
 <br>
-
 ### スクリプトの実装
 ```csharp
 public class Test
