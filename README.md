@@ -10,8 +10,17 @@ UnityのUIを使用したシーン遷移のマネージャー<br>
 <img src="https://78.media.tumblr.com/d2894885bdc4ffb8fdf52d5ca09ec381/tumblr_p3lwz7zTk91u4382eo1_1280.gif" alt="シーン遷移サンプル6" title="サンプル"><br>
 
 ## 使い方
-シーン上にこのスクリプトを付けたGameObjectを配置して、  
-TransitionManager.Instance.LoadLevel()を呼ぶとシーンが遷移します。
+
+
+### スクリプトの実装
+セルにデータを渡すためのオブジェクトを定義します。
+```csharp
+public class MyCellDto
+{
+    public string Message;
+}
+```
+
 
 ## 開発環境
 Unity 2017.3.0f3<br>
