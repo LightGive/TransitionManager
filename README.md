@@ -1,4 +1,4 @@
-# TransitionManager[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)<br>
+# TransitionManager [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)<br>
 UnityのUIを使用したシーン遷移のマネージャー<br>
 
 ## SceneTransition Sample<br>
@@ -10,8 +10,8 @@ UnityのUIを使用したシーン遷移のマネージャー<br>
 <img src="https://78.media.tumblr.com/d2894885bdc4ffb8fdf52d5ca09ec381/tumblr_p3lwz7zTk91u4382eo1_1280.gif" alt="シーン遷移サンプル6" title="サンプル"><br>
 
 ## 使い方
-1.Create gameObject.<br>
-2.Add component "TransitionManager".<br>
+1. Create gameObject.<br>
+2. Add component "TransitionManager".<br>
 <br>
 
 ### スクリプトの実装
