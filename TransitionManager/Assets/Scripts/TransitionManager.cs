@@ -41,7 +41,9 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
     [SerializeField]
     private Color transitionColor = Color.black;
     [SerializeField]
-    private TransitionType transitionType;
+    private TransitionType transitionType = TransitionType.Fade;
+    [SerializeField]
+    private AnimationCurve animationCurve = AnimationCurve.Linear(0,0,1,1);
 
 	private float transTimeCnt = 0.0f;
 	private bool isTransition = false;
@@ -103,7 +105,8 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		transImageRectTransfrm.localPosition = Vector3.zero;
 		transImageRectTransfrm.sizeDelta = Vector3.zero;
 
-		transTexture = new Texture2D(32, 32, TextureFormat.RGB24, false);
+        //CreateTexture
+        transTexture = new Texture2D(32, 32, TextureFormat.RGB24, false);
 
 		for(int i = 0; i < transTexture.width; i++)
 		{
@@ -113,11 +116,12 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 			}
 		}
 
-		//スプライト作成
+
+		//CreateSprite
 		transSprite = Sprite.Create(transTexture, new Rect(0, 0, 32, 32), Vector2.zero);
 		transSprite.name = "TranstionName";
 
-		//スプライト設定
+		//ImageSetting
 		transImage.sprite = transSprite;
 		transImage.type = Image.Type.Filled;
 		transImage.fillAmount = 1.0f ;
@@ -236,23 +240,20 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		while (timeCnt <= _transtime)
 		{
 			lerp = Mathf.Clamp(timeCnt / _transtime, 0.0f, 1.0f);
-            SceneTransitionDirection(lerp);
+            SceneTransitionDirection(animationCurve.Evaluate(lerp));
 			timeCnt += Time.deltaTime;
 			yield return 0;
 		}
 
 		//シーン遷移
-#if UNITY_5_3
 		SceneManager.LoadScene(_scenename);
-#else
-		Application.LoadLevel(_scenename);
-#endif
 
 		timeCnt = 0.0f;
 		while (timeCnt <= _transtime)
 		{
 			lerp = 1.0f - Mathf.Clamp(timeCnt / _transtime, 0.0f, 1.0f);
-			SceneTransitionDirection(lerp); timeCnt += Time.deltaTime;
+            SceneTransitionDirection(animationCurve.Evaluate(lerp)); 
+            timeCnt += Time.deltaTime;
 			yield return 0;
 		}
 

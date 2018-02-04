@@ -140,8 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1af0e7c13154368af96d8c71a301d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionTime: 1
-  transitionColor: {r: 1, g: 0.45588237, b: 0.45588237, a: 1}
+  defaultTime: 1
+  transitionColor: {r: 0, g: 0, b: 0, a: 1}
   transitionType: 16
 --- !u!4 &384044201
 Transform:
