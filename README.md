@@ -16,8 +16,8 @@ ImageのImageTypeを変えて色んな遷移方法を実装しています。<br
 2. Add component "TransitionManager".<br>
 <img src="https://78.media.tumblr.com/d2894885bdc4ffb8fdf52d5ca09ec381/tumblr_p3lwz7zTk91u4382eo1_1280.gif" alt="シーン遷移サンプル6" title="サンプル"><br>
 
-### SettingInspector 
-| Property | Description |
+### インスペクターの設定 
+| プロパティ | 説明 |
 |:---|:---|
 | TransitionTime | シーンの遷移時間 |
 | TransitionColor | シーン遷移時の背景の色 |
@@ -34,7 +34,6 @@ public class Test
     }
 }
 ```
-
 
 ## 開発環境
 Unity 2017.3.0f3<br>
