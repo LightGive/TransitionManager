@@ -37,7 +37,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 
 
     [SerializeField]
-    private float defaultTransitionTime = 1.0f;
+    private float transitionTime = 1.0f;
     [SerializeField]
     private Color transitionColor = Color.black;
     [SerializeField]
@@ -65,8 +65,8 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 
     void Init()
     {
-        if (defaultTransitionTime <= 0.0f)
-            defaultTransitionTime = 0.0f;
+        if (transitionTime <= 0.0f)
+            transitionTime = 0.0f;
 
         if (this.gameObject.GetComponent<Canvas>() != null)
             fadeCanvas = this.gameObject.GetComponent<Canvas>();

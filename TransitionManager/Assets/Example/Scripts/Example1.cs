@@ -16,6 +16,6 @@ public class Example1 : MonoBehaviour
 
     public void OnButtonDown()
     {
-        TransitionManager.Instance.LoadLevel("Example2", 1);
+        TransitionManager.Instance.LoadLevel("Example2", 1.0f, TransitionManager.TransitionType.Radial180_Bottom, Color.red);
     }
 }
