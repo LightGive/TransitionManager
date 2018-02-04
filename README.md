@@ -10,8 +10,9 @@ UnityのUIを使用したシーン遷移のマネージャー<br>
 <img src="https://78.media.tumblr.com/d2894885bdc4ffb8fdf52d5ca09ec381/tumblr_p3lwz7zTk91u4382eo1_1280.gif" alt="シーン遷移サンプル6" title="サンプル"><br>
 
 ## 使い方
-1.CreateGameObject
-2.AddComponent "TransitionManager"
+1.CreateGameObject<br>
+2.AddComponent "TransitionManager"<br>
+<br>
 
 ### スクリプトの実装
 ```csharp
