@@ -17,19 +17,21 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	private const string ShaderParamFloatCutoff = "_Cutoff";
 
 	[SerializeField]
+	private TransitionType transType;
+	[SerializeField]
+	private float m_transDuration = DefaultTransitionTime;
+	[SerializeField]
 	private Texture m_transTex;
 	[SerializeField]
 	private Shader m_transShader;
 	[SerializeField]
 	private Color m_transColor = Color.black;
 	[SerializeField]
-	private float m_transDuration = DefaultTransitionTime;
-	[SerializeField]
 	private AnimationCurve m_transCurve = AnimationCurve.Linear(0, 0, 1, 1);
 	[SerializeField]
-	private float transAlphaCutOff = 0.0f;
-	[SerializeField]
-	private bool transIsInvert = false;
+	private bool m_transInvert = false;
+	//[SerializeField]
+	//private float transAlphaCutOff = 0.0f;
 
 	public Texture TransTex
 	{
@@ -43,11 +45,11 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		set { m_transShader = value; }
 	}
 
-	public float TransAlphaCutOff
-	{
-		get { return transAlphaCutOff; }
-		set { transAlphaCutOff = value; }
-	}
+	//public float TransAlphaCutOff
+	//{
+	//	get { return transAlphaCutOff; }
+	//	set { transAlphaCutOff = value; }
+	//}
 
 	public AnimationCurve TransCurve
 	{
@@ -57,8 +59,8 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 
 	public bool TransIsInvert
 	{
-		get { return transIsInvert; }
-		set { transIsInvert = value; }
+		get { return m_transInvert; }
+		set { m_transInvert = value; }
 	}
 
 	private int imageCnt = 0;
@@ -69,7 +71,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	private CanvasScaler fadeCancasScaler;
 	private Canvas fadeCanvas;
 
-	public TransitionType transType;
 
 	//遷移方法の種類をまとめたもの
 	public enum TransitionType
@@ -152,7 +153,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 				Material mat = new Material(m_transShader);
 				transRawImage.material = mat;
 				transRawImage.material.SetTexture(ShaderParamFloatGradation, m_transTex);
-				transRawImage.material.SetFloat(ShaderParamFloatInvert, transIsInvert ? 1.0f : 0.0f);
+				transRawImage.material.SetFloat(ShaderParamFloatInvert, m_transInvert ? 1.0f : 0.0f);
 				break;
 
 			case TransitionType.Horizontal_Right:
