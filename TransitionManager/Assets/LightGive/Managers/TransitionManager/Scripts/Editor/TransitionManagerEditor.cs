@@ -41,6 +41,8 @@ namespace LightGive
 			m_isInvertProp = serializedObject.FindProperty("m_isInvert");
 
 			m_previewMat = new Material(Shader.Find(TransitionManager.TransitionShaderName));
+			if ((Texture)m_ruleTexProp.objectReferenceValue != null)
+				m_previewMat.SetTexture(TransitionManager.ShaderParamTextureGradation, (Texture)m_ruleTexProp.objectReferenceValue);
 		}
 
 

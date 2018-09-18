@@ -1,4 +1,27 @@
-﻿using UnityEngine;
+﻿#region License
+//Copyright(c) 2017 Akase Matsuura
+//https://github.com/LightGive/TransitionManager
+
+//Permission is hereby granted, free of charge, to any person obtaining a
+//copy of this software and associated documentation files (the
+//"Software"), to deal in the Software without restriction, including
+//without limitation the rights to use, copy, modify, merge, publish, 
+//distribute, sublicense, and/or sell copies of the Software, and to
+//permit persons to whom the Software is furnished to do so, subject to
+//the following conditions:
+
+//The above copyright notice and this permission notice shall be
+//included in all copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+//EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+//MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+//LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+//OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+//WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#endregion
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -30,38 +53,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	[SerializeField]
 	private bool m_isInvert = false;
 
-	//[SerializeField]
-	//private float transAlphaCutOff = 0.0f;
-
-	public Texture ruleTex
-	{
-		get { return m_ruleTex; }
-		set { m_ruleTex = value; }
-	}
-
-	public Shader TransShader
-	{
-		get { return m_transShader; }
-		set { m_transShader = value; }
-	}
-
-	//public float TransAlphaCutOff
-	//{
-	//	get { return transAlphaCutOff; }
-	//	set { transAlphaCutOff = value; }
-	//}
-
-	public AnimationCurve TransCurve
-	{
-		get { return m_animCurve; }
-		set { m_animCurve = value; }
-	}
-
-	public bool TransIsInvert
-	{
-		get { return m_isInvert; }
-		set { m_isInvert = value; }
-	}
 
 	private int m_texCount = 0;
 	private bool m_isTransition = false;
