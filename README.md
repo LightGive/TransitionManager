@@ -21,15 +21,18 @@ ver 1.1.1:ルール画像のプレビューを表示するなどインスペク�
 ### Rule Texture Transition<br>
 <img src="https://78.media.tumblr.com/dbee1b043471c699243e7b7d5ebe182b/tumblr_pf8f678GVz1u4382eo6_400.gif" alt="シーン遷移サンプル7" title="サンプル">
 
-### インスペクターの設定 
+## InspectorSetting
 | プロパティ | 説明 |
 |:---|:---|
-| TransitionTime | シーンの遷移時間 |
-| TransitionColor | シーン遷移時の背景の色 |
-| TransitionType | シーン遷移の方法 |
-| AnimationCurve| シーン遷移のアニメーションカーブ |
+| TransitionType | 遷移の種類 |
+| Duration | 遷移時間 |
+| TexColor | 背景の色 |
+| AnimCurve| 遷移時間のカーブ |
 
-### スクリプトの実装
+<img src="https://78.media.tumblr.com/0075610ec93360c88caa2c9cbf627d2d/tumblr_pf8g7lwe8b1u4382eo1_400.gif" alt="シーン遷移サンプル7" title="サンプル">
+
+## SampleScript
+
 ```csharp
 public class Test
 {
