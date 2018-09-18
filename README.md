@@ -3,7 +3,12 @@ UnityのUIを使用したシーン遷移のマネージャー<br>
 ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事が出来ます。<br>
 ルール画像を設定したトランジションも可能。<br>
 
+## Update <br>
+ver 1.1.0:ルール画像でシーン遷移出来るように追加(2018.09.17)<br>
+ver 1.1.1:ルール画像のプレビューを表示するなどインスペクター拡張(2018.09.18)<br>
+
 ## Example <br>
+シーンの遷移の表示例<br>
 
 ### UI_Transition<br>
 <img src="https://78.media.tumblr.com/1a6ae7adbbb33c3a4cfeab020fb5b161/tumblr_pf8f678GVz1u4382eo1_400.gif" alt="シーン遷移サンプル1" title="サンプル"><img src="https://78.media.tumblr.com/72e838e53edbf4d56494e5af5ea74d9f/tumblr_pf8f678GVz1u4382eo2_400.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
@@ -15,12 +20,6 @@ ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事�
 
 ### Rule Texture Transition<br>
 <img src="https://78.media.tumblr.com/dbee1b043471c699243e7b7d5ebe182b/tumblr_pf8f678GVz1u4382eo6_400.gif" alt="シーン遷移サンプル7" title="サンプル">
-
-## 使い方
-1. GameObjectを作成.<br>
-2. "TransitionManager.cs"をAdd Componentする<br>
-<br>
-<img src="https://78.media.tumblr.com/8393804e5f253b6e5f00d6b9a13a6589/tumblr_p3lyieVtxx1u4382eo1_1280.png" alt="シーン遷移サンプル6" title="サンプル"><br>
 
 ### インスペクターの設定 
 | プロパティ | 説明 |
@@ -41,8 +40,8 @@ public class Test
 }
 ```
 
-## 開発環境
-Unity 2017.3.0f3<br>
+## UnityVersion
+Unity 2018.1.5f1<br>
 
 ## License
 See [LICENSE](/LICENSE).
