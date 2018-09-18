@@ -1,7 +1,7 @@
 # TransitionManager [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)<br>
 UnityのUIを使用したシーン遷移のマネージャー<br>
 ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事が出来ます。<br>
-ルール画像を設定したトランジションも可能。<br>
+ルール画像を設定したトランジションも追加しました。<br>
 
 ## Update <br>
 ver 1.1.0:ルール画像でシーン遷移出来るように追加(2018.09.17)<br>
