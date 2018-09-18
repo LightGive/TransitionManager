@@ -5,14 +5,13 @@ ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事�
 
 ## シーン遷移のサンプル <br>
 
-
-## シーン遷移のサンプル <br>
-<img src="https://78.media.tumblr.com/1a6ae7adbbb33c3a4cfeab020fb5b161/tumblr_pf8f678GVz1u4382eo1_400.gif" alt="シーン遷移サンプル1" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/ef5c3f6ff4c17df92d8bf2ad35cd0467/tumblr_p3lwxkHmiE1u4382eo1_1280.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/1eacd7ba93eaa2ce63350978cff9d7bc/tumblr_p3lwxvaRZW1u4382eo1_1280.gif" alt="シーン遷移サンプル3" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/047f8092db3bd2797ee806804b4fb43c/tumblr_p3lwynxVhg1u4382eo1_1280.gif" alt="シーン遷移サンプル4" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/501edb93fc8c1f3c29371f3d5d46c1e6/tumblr_p3lwyxzqkN1u4382eo1_1280.gif" alt="シーン遷移サンプル5" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/d2894885bdc4ffb8fdf52d5ca09ec381/tumblr_p3lwz7zTk91u4382eo1_1280.gif" alt="シーン遷移サンプル6" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/1a6ae7adbbb33c3a4cfeab020fb5b161/tumblr_pf8f678GVz1u4382eo1_400.gif" alt="シーン遷移サンプル1" title="サンプル">
+<img src="https://78.media.tumblr.com/72e838e53edbf4d56494e5af5ea74d9f/tumblr_pf8f678GVz1u4382eo2_400.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/cb19b6219ad75b62a7e576b43d2eb040/tumblr_pf8f678GVz1u4382eo3_400.gif" alt="シーン遷移サンプル3" title="サンプル">
+<img src="https://78.media.tumblr.com/9659dd627bf835c7bda6fb3275004add/tumblr_pf8f678GVz1u4382eo4_400.gif" alt="シーン遷移サンプル4" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/88f456d4dd9f56744a124fb7a59f386d/tumblr_pf8f678GVz1u4382eo5_400.gif" alt="シーン遷移サンプル5" title="サンプル">
+<img src="https://78.media.tumblr.com/1fdbab5844b8df4bdb77b7e4eaf49954/tumblr_pf8f678GVz1u4382eo7_400.gif" alt="シーン遷移サンプル6" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/dbee1b043471c699243e7b7d5ebe182b/tumblr_pf8f678GVz1u4382eo6_400.gif" alt="シーン遷移サンプル7" title="サンプル">
 
 ## 使い方
 1. GameObjectを作成.<br>
