@@ -7,6 +7,10 @@ ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事�
 ver 1.1.0:ルール画像でシーン遷移出来るように追加(2018.09.17)<br>
 ver 1.1.1:ルール画像のプレビューを表示するなどインスペクター拡張(2018.09.18)<br>
 
+## Download (UnityPackage)
+[TransitionManager(1.1.0)_IncludedExample](https://www.dropbox.com/s/330z0xg04u5o008/TransitionManager%281.1.0%29_IncludedExample.unitypackage?dl=0"SystemCalc(1.0.1)_IncludedExample")<br>
+[TransitionManager(1.1.0)_NoExample](https://www.dropbox.com/s/qtvzge317r3pf3q/TransitionManager%281.1.0%29_NoExample.unitypackage?dl=0"SystemCalc(1.0.1)_IncludedExample")<br>
+
 ## Example <br>
 シーンの遷移の表示例<br>
 
