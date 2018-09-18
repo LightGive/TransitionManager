@@ -1,10 +1,13 @@
 # TransitionManager [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)<br>
 UnityのUIを使用したシーン遷移のマネージャー<br>
-ImageのImageTypeを変えて色んな遷移方法を実装しています<br>
+ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事が出来ます。<br>
+ルール画像を設定したトランジションも可能。<br>
+
+## シーン遷移のサンプル <br>
 
 
 ## シーン遷移のサンプル <br>
-<img src="https://78.media.tumblr.com/14349e6ca31f887e7d8a84703312cdbe/tumblr_p3lwx73LWQ1u4382eo1_1280.gif" alt="シーン遷移サンプル1" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/1a6ae7adbbb33c3a4cfeab020fb5b161/tumblr_pf8f678GVz1u4382eo1_400.gif" alt="シーン遷移サンプル1" title="サンプル"><br>
 <img src="https://78.media.tumblr.com/ef5c3f6ff4c17df92d8bf2ad35cd0467/tumblr_p3lwxkHmiE1u4382eo1_1280.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
 <img src="https://78.media.tumblr.com/1eacd7ba93eaa2ce63350978cff9d7bc/tumblr_p3lwxvaRZW1u4382eo1_1280.gif" alt="シーン遷移サンプル3" title="サンプル"><br>
 <img src="https://78.media.tumblr.com/047f8092db3bd2797ee806804b4fb43c/tumblr_p3lwynxVhg1u4382eo1_1280.gif" alt="シーン遷移サンプル4" title="サンプル"><br>
