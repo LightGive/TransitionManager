@@ -17,11 +17,9 @@ namespace LightGive
 		private GameObject[] m_createManagers;
 		public GameObject[] createManagers { get { return m_createManagers; } }
 
-
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void InitializeBeforeSceneLoad()
 		{
-
 			var managerCreator = Resources.Load<ManagerCreator>("ManagerCreator");
 			if (managerCreator == null)
 			{

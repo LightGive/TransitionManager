@@ -11,32 +11,32 @@ using LightGive;
 /// </summary>
 public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionManager>
 {
+	public const string TransitionShaderName = "LightGive/Unlit/TransitionShader";
+	public const string ShaderParamTextureGradation = "_Gradation";
+	public const string ShaderParamFloatInvert = "_Invert";
+	public const string ShaderParamFloatCutoff = "_Cutoff";
 	private const float DefaultTransitionTime = 1.0f;
-	private const string ShaderParamFloatGradation = "_Gradation";
-	private const string ShaderParamFloatInvert = "_Invert";
-	private const string ShaderParamFloatCutoff = "_Cutoff";
 
 	[SerializeField]
-	private TransitionType transType;
+	private TransitionType m_transitionType;
 	[SerializeField]
-	private float m_transDuration = DefaultTransitionTime;
+	private float m_duration = DefaultTransitionTime;
 	[SerializeField]
-	private Texture m_transTex;
+	private Texture m_ruleTex;
 	[SerializeField]
-	private Shader m_transShader;
+	private Color m_texColor = Color.black;
 	[SerializeField]
-	private Color m_transColor = Color.black;
+	private AnimationCurve m_animCurve = AnimationCurve.Linear(0, 0, 1, 1);
 	[SerializeField]
-	private AnimationCurve m_transCurve = AnimationCurve.Linear(0, 0, 1, 1);
-	[SerializeField]
-	private bool m_transInvert = false;
+	private bool m_isInvert = false;
+
 	//[SerializeField]
 	//private float transAlphaCutOff = 0.0f;
 
-	public Texture TransTex
+	public Texture ruleTex
 	{
-		get { return m_transTex; }
-		set { m_transTex = value; }
+		get { return m_ruleTex; }
+		set { m_ruleTex = value; }
 	}
 
 	public Shader TransShader
@@ -53,52 +53,53 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 
 	public AnimationCurve TransCurve
 	{
-		get { return m_transCurve; }
-		set { m_transCurve = value; }
+		get { return m_animCurve; }
+		set { m_animCurve = value; }
 	}
 
 	public bool TransIsInvert
 	{
-		get { return m_transInvert; }
-		set { m_transInvert = value; }
+		get { return m_isInvert; }
+		set { m_isInvert = value; }
 	}
 
-	private int imageCnt = 0;
-	private bool isTransition = false;
-	private Sprite transSprite;
-	private Image transImage;
-	private RawImage transRawImage;
-	private CanvasScaler fadeCancasScaler;
-	private Canvas fadeCanvas;
+	private int m_texCount = 0;
+	private bool m_isTransition = false;
+	private Sprite m_transitionSprite;
+	private Image m_transImage;
+	private RawImage m_transRawImage;
+	private CanvasScaler m_baseCanvasScaler;
+	private Canvas m_baseCanvas;
+	private Shader m_transShader;
 
 
 	//遷移方法の種類をまとめたもの
 	public enum TransitionType
 	{
-		Fade,
+		Fade = 0,
 
-		Custom,
+		Horizontal_Right = 1,
+		Horizontal_Left = 2,
 
-		Horizontal_Right,
-		Horizontal_Left,
+		Vertical_Top = 3,
+		Vertical_Bottom = 4,
 
-		Vertical_Top,
-		Vertical_Bottom,
+		Radial90_TopRight = 5,
+		Radial90_TopLeft = 6,
+		Radial90_BottomRight = 7,
+		Radial90_BottomLeft = 8,
 
-		Radial90_TopRight,
-		Radial90_TopLeft,
-		Radial90_BottomRight,
-		Radial90_BottomLeft,
+		Radial180_Right = 9,
+		Radial180_Left = 10,
+		Radial180_Top = 11,
+		Radial180_Bottom = 12,
 
-		Radial180_Right,
-		Radial180_Left,
-		Radial180_Top,
-		Radial180_Bottom,
+		Radial360_Right = 13,
+		Radial360_Left = 14,
+		Radial360_Top = 15,
+		Radial360_Bottom = 16,
 
-		Radial360_Right,
-		Radial360_Left,
-		Radial360_Top,
-		Radial360_Bottom,
+		Custom = 17,
 	}
 
 	protected override void Awake()
@@ -112,8 +113,8 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// </summary>
 	void Init()
 	{
-		if (m_transDuration <= 0.0f)
-			m_transDuration = DefaultTransitionTime;
+		if (m_duration <= 0.0f)
+			m_duration = DefaultTransitionTime;
 
 		//Canvasを生成
 		CreateCanvas();
@@ -128,102 +129,102 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		Texture2D plainTex = CreateTexture2D();
 
 		//スプライト作成
-		transSprite = Sprite.Create(plainTex, new Rect(0, 0, 32, 32), Vector2.zero);
+		m_transitionSprite = Sprite.Create(plainTex, new Rect(0, 0, 32, 32), Vector2.zero);
 
 		//スプライト設定
-		transSprite.name = "TransitionSpeite";
-		transImage.sprite = transSprite;
-		transImage.type = Image.Type.Filled;
-		transImage.fillAmount = 1.0f;
+		m_transitionSprite.name = "TransitionSpeite";
+		m_transImage.sprite = m_transitionSprite;
+		m_transImage.type = Image.Type.Filled;
+		m_transImage.fillAmount = 1.0f;
 
-		m_transShader = Shader.Find("LightGive/Unlit/TransitionShader");
+		m_transShader = Shader.Find(TransitionShaderName);
 		if (m_transShader == null)
 		{
 			Debug.Log("I could not find a shader.");
-			transType = TransitionType.Fade;
+			m_transitionType = TransitionType.Fade;
 		}
 
-		switch (transType)
+		switch (m_transitionType)
 		{
 			case TransitionType.Fade:
-				transImage.fillAmount = 1.0f;
+				m_transImage.fillAmount = 1.0f;
 				break;
 
 			case TransitionType.Custom:
 				Material mat = new Material(m_transShader);
-				transRawImage.material = mat;
-				transRawImage.material.SetTexture(ShaderParamFloatGradation, m_transTex);
-				transRawImage.material.SetFloat(ShaderParamFloatInvert, m_transInvert ? 1.0f : 0.0f);
+				m_transRawImage.material = mat;
+				m_transRawImage.material.SetTexture(ShaderParamTextureGradation, m_ruleTex);
+				m_transRawImage.material.SetFloat(ShaderParamFloatInvert, m_isInvert ? 1.0f : 0.0f);
 				break;
 
 			case TransitionType.Horizontal_Right:
-				transImage.fillMethod = Image.FillMethod.Horizontal;
-				transImage.fillOrigin = (int)Image.OriginHorizontal.Right;
+				m_transImage.fillMethod = Image.FillMethod.Horizontal;
+				m_transImage.fillOrigin = (int)Image.OriginHorizontal.Right;
 				break;
 			case TransitionType.Horizontal_Left:
-				transImage.fillMethod = Image.FillMethod.Horizontal;
-				transImage.fillOrigin = (int)Image.OriginHorizontal.Left;
+				m_transImage.fillMethod = Image.FillMethod.Horizontal;
+				m_transImage.fillOrigin = (int)Image.OriginHorizontal.Left;
 				break;
 			case TransitionType.Vertical_Top:
-				transImage.fillMethod = Image.FillMethod.Vertical;
-				transImage.fillOrigin = (int)Image.OriginVertical.Top;
+				m_transImage.fillMethod = Image.FillMethod.Vertical;
+				m_transImage.fillOrigin = (int)Image.OriginVertical.Top;
 				break;
 			case TransitionType.Vertical_Bottom:
-				transImage.fillMethod = Image.FillMethod.Vertical;
-				transImage.fillOrigin = (int)Image.OriginVertical.Bottom;
+				m_transImage.fillMethod = Image.FillMethod.Vertical;
+				m_transImage.fillOrigin = (int)Image.OriginVertical.Bottom;
 				break;
 			case TransitionType.Radial90_TopRight:
-				transImage.fillMethod = Image.FillMethod.Radial90;
-				transImage.fillOrigin = (int)Image.Origin90.TopRight;
+				m_transImage.fillMethod = Image.FillMethod.Radial90;
+				m_transImage.fillOrigin = (int)Image.Origin90.TopRight;
 				break;
 			case TransitionType.Radial90_TopLeft:
-				transImage.fillMethod = Image.FillMethod.Radial90;
-				transImage.fillOrigin = (int)Image.Origin90.TopLeft;
+				m_transImage.fillMethod = Image.FillMethod.Radial90;
+				m_transImage.fillOrigin = (int)Image.Origin90.TopLeft;
 				break;
 			case TransitionType.Radial90_BottomRight:
-				transImage.fillMethod = Image.FillMethod.Radial90;
-				transImage.fillOrigin = (int)Image.Origin90.BottomRight;
+				m_transImage.fillMethod = Image.FillMethod.Radial90;
+				m_transImage.fillOrigin = (int)Image.Origin90.BottomRight;
 				break;
 			case TransitionType.Radial90_BottomLeft:
-				transImage.fillMethod = Image.FillMethod.Radial90;
-				transImage.fillOrigin = (int)Image.Origin90.BottomLeft;
+				m_transImage.fillMethod = Image.FillMethod.Radial90;
+				m_transImage.fillOrigin = (int)Image.Origin90.BottomLeft;
 				break;
 			case TransitionType.Radial180_Right:
-				transImage.fillMethod = Image.FillMethod.Radial180;
-				transImage.fillOrigin = (int)Image.Origin180.Right;
+				m_transImage.fillMethod = Image.FillMethod.Radial180;
+				m_transImage.fillOrigin = (int)Image.Origin180.Right;
 				break;
 			case TransitionType.Radial180_Left:
-				transImage.fillMethod = Image.FillMethod.Radial180;
-				transImage.fillOrigin = (int)Image.Origin180.Left;
+				m_transImage.fillMethod = Image.FillMethod.Radial180;
+				m_transImage.fillOrigin = (int)Image.Origin180.Left;
 				break;
 			case TransitionType.Radial180_Top:
-				transImage.fillMethod = Image.FillMethod.Radial180;
-				transImage.fillOrigin = (int)Image.Origin180.Top;
+				m_transImage.fillMethod = Image.FillMethod.Radial180;
+				m_transImage.fillOrigin = (int)Image.Origin180.Top;
 				break;
 			case TransitionType.Radial180_Bottom:
-				transImage.fillMethod = Image.FillMethod.Radial180;
-				transImage.fillOrigin = (int)Image.Origin180.Bottom;
+				m_transImage.fillMethod = Image.FillMethod.Radial180;
+				m_transImage.fillOrigin = (int)Image.Origin180.Bottom;
 				break;
 			case TransitionType.Radial360_Right:
-				transImage.fillMethod = Image.FillMethod.Radial360;
-				transImage.fillOrigin = (int)Image.Origin360.Right;
+				m_transImage.fillMethod = Image.FillMethod.Radial360;
+				m_transImage.fillOrigin = (int)Image.Origin360.Right;
 				break;
 			case TransitionType.Radial360_Left:
-				transImage.fillMethod = Image.FillMethod.Radial360;
-				transImage.fillOrigin = (int)Image.Origin360.Left;
+				m_transImage.fillMethod = Image.FillMethod.Radial360;
+				m_transImage.fillOrigin = (int)Image.Origin360.Left;
 				break;
 			case TransitionType.Radial360_Top:
-				transImage.fillMethod = Image.FillMethod.Radial360;
-				transImage.fillOrigin = (int)Image.Origin360.Top;
+				m_transImage.fillMethod = Image.FillMethod.Radial360;
+				m_transImage.fillOrigin = (int)Image.Origin360.Top;
 				break;
 			case TransitionType.Radial360_Bottom:
-				transImage.fillMethod = Image.FillMethod.Radial360;
-				transImage.fillOrigin = (int)Image.Origin360.Bottom;
+				m_transImage.fillMethod = Image.FillMethod.Radial360;
+				m_transImage.fillOrigin = (int)Image.Origin360.Bottom;
 				break;
 		}
 
-		transRawImage.gameObject.SetActive(false);
-		transImage.gameObject.SetActive(false);
+		m_transRawImage.gameObject.SetActive(false);
+		m_transImage.gameObject.SetActive(false);
 
 	}
 
@@ -234,7 +235,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// <param name="_scenename">遷移先シーン名</param>
 	public void LoadLevel(string _scenename)
 	{
-		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(_scenename), m_transDuration));
+		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(_scenename), m_duration));
 	}
 
 	/// <summary>
@@ -261,7 +262,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// </summary>
 	public void ReLoadLevel()
 	{
-		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), m_transDuration));
+		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), m_duration));
 	}
 
 	/// <summary>
@@ -278,7 +279,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// </summary>
 	public void Quit()
 	{
-		StartCoroutine(StartTransitionEffect(() => Application.Quit(), m_transDuration));
+		StartCoroutine(StartTransitionEffect(() => Application.Quit(), m_duration));
 	}
 
 	public void StartTransitonEffect(float _transtime, UnityAction _act)
@@ -293,23 +294,23 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	void CreateCanvas()
 	{
 		if (this.gameObject.GetComponent<Canvas>() != null)
-			fadeCanvas = this.gameObject.GetComponent<Canvas>();
+			m_baseCanvas = this.gameObject.GetComponent<Canvas>();
 		else
-			fadeCanvas = this.gameObject.AddComponent<Canvas>();
+			m_baseCanvas = this.gameObject.AddComponent<Canvas>();
 
-		fadeCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-		fadeCanvas.sortingOrder = 999;
-		fadeCanvas.pixelPerfect = false;
+		m_baseCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+		m_baseCanvas.sortingOrder = 999;
+		m_baseCanvas.pixelPerfect = false;
 
 		if (this.gameObject.GetComponent<CanvasScaler>() != null)
-			fadeCancasScaler = this.gameObject.GetComponent<CanvasScaler>();
+			m_baseCanvasScaler = this.gameObject.GetComponent<CanvasScaler>();
 		else
-			fadeCancasScaler = this.gameObject.AddComponent<CanvasScaler>();
+			m_baseCanvasScaler = this.gameObject.AddComponent<CanvasScaler>();
 
-		fadeCancasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-		fadeCancasScaler.referenceResolution = new Vector2(Screen.width, Screen.height);
-		fadeCancasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Shrink;
-		fadeCancasScaler.referencePixelsPerUnit = 100.0f;
+		m_baseCanvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+		m_baseCanvasScaler.referenceResolution = new Vector2(Screen.width, Screen.height);
+		m_baseCanvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Shrink;
+		m_baseCanvasScaler.referencePixelsPerUnit = 100.0f;
 
 	}
 
@@ -325,9 +326,9 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		transImageObj.transform.localPosition = Vector3.zero;
 		transImageObj.transform.localScale = Vector3.one;
 		transImageObj.transform.rotation = Quaternion.identity;
-		transImage = transImageObj.AddComponent<Image>();
-		transImage.color = m_transColor;
-		transImage.sprite = null;
+		m_transImage = transImageObj.AddComponent<Image>();
+		m_transImage.color = m_texColor;
+		m_transImage.sprite = null;
 		RectTransform transImageRectTransfrm;
 		transImageRectTransfrm = transImageObj.GetComponent<RectTransform>();
 		transImageRectTransfrm.anchorMin = Vector2.zero;
@@ -350,9 +351,9 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		transRawImageObj.transform.localPosition = Vector3.zero;
 		transRawImageObj.transform.localScale = Vector3.one;
 		transRawImageObj.transform.rotation = Quaternion.identity;
-		transRawImage = transRawImageObj.AddComponent<RawImage>();
-		transRawImage.color = m_transColor;
-		transRawImage.texture = null;
+		m_transRawImage = transRawImageObj.AddComponent<RawImage>();
+		m_transRawImage.color = m_texColor;
+		m_transRawImage.texture = null;
 		RectTransform transRawImageRectTransfrm;
 		transRawImageRectTransfrm = transRawImageObj.GetComponent<RectTransform>();
 		transRawImageRectTransfrm.anchorMin = Vector2.zero;
@@ -390,10 +391,10 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	private IEnumerator StartTransitionEffect(UnityAction _act, float _transtime)
 	{
 		//コルーチンが動いている時、中断
-		if (isTransition)
+		if (m_isTransition)
 			yield break;
 
-		isTransition = true;
+		m_isTransition = true;
 		SceneTransitionInit();
 
 		float t = Time.time;
@@ -401,7 +402,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 
 		while (Time.time - t < _transtime)
 		{
-			lp = m_transCurve.Evaluate((Time.time - t) / _transtime);
+			lp = m_animCurve.Evaluate((Time.time - t) / _transtime);
 			SceneTransitionDirection(lp);
 			yield return null;
 		}
@@ -413,27 +414,27 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		t = Time.time;
 		lp = 0.0f;
 
-		m_transCurve = FlipCurve();
+		m_animCurve = FlipCurve();
 
 		while (Time.time - t < _transtime)
 		{
-			lp = m_transCurve.Evaluate((Time.time - t) / _transtime);
+			lp = m_animCurve.Evaluate((Time.time - t) / _transtime);
 			SceneTransitionDirection(lp);
 			yield return null;
 		}
-		m_transCurve = FlipCurve();
+		m_animCurve = FlipCurve();
 
-		isTransition = false;
+		m_isTransition = false;
 
 		if (IsRawImage())
 		{
 			SceneTransitionDirection(0.0f);
-			transRawImage.gameObject.SetActive(false);
+			m_transRawImage.gameObject.SetActive(false);
 		}
 		else
 		{
-			transImage.fillAmount = 0.0f;
-			transImage.gameObject.SetActive(false);
+			m_transImage.fillAmount = 0.0f;
+			m_transImage.gameObject.SetActive(false);
 		}
 	}
 
@@ -448,9 +449,9 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	{
 		AnimationCurve newCurve = new AnimationCurve();
 
-		for (int i = 0; i < m_transCurve.length; i++)
+		for (int i = 0; i < m_animCurve.length; i++)
 		{
-			Keyframe key = m_transCurve[i];
+			Keyframe key = m_animCurve[i];
 			key.time = 1f - key.time;
 			key.inTangent = key.inTangent * -1f;
 			key.outTangent = key.outTangent * -1f;
@@ -466,18 +467,18 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// <param name="_lerp"></param>
 	void SceneTransitionDirection(float _lerp)
 	{
-		switch (transType)
+		switch (m_transitionType)
 		{
 			case TransitionType.Fade:
-				transImage.color = new Color(m_transColor.r, m_transColor.g, m_transColor.b, _lerp);
+				m_transImage.color = new Color(m_texColor.r, m_texColor.g, m_texColor.b, _lerp);
 				break;
 
 			case TransitionType.Custom:
-				transRawImage.material.SetFloat(ShaderParamFloatCutoff, _lerp);
+				m_transRawImage.material.SetFloat(ShaderParamFloatCutoff, _lerp);
 				break;
 
 			default:
-				transImage.fillAmount = _lerp;
+				m_transImage.fillAmount = _lerp;
 				break;
 		}
 	}
@@ -487,23 +488,23 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// </summary>
 	void SceneTransitionInit()
 	{
-		switch (transType)
+		switch (m_transitionType)
 		{
 			case TransitionType.Fade:
-				transImage.fillAmount = 1.0f;
+				m_transImage.fillAmount = 1.0f;
 				break;
 			default:
-				transImage.fillAmount = 0.0f;
+				m_transImage.fillAmount = 0.0f;
 				break;
 		}
 
 		if (IsRawImage())
 		{
-			transRawImage.gameObject.SetActive(true);
+			m_transRawImage.gameObject.SetActive(true);
 		}
 		else
 		{
-			transImage.gameObject.SetActive(true);
+			m_transImage.gameObject.SetActive(true);
 		}
 
 	}
@@ -513,13 +514,13 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// </summary>
 	void SceneTransitionEnd()
 	{
-		switch (transType)
+		switch (m_transitionType)
 		{
 			case TransitionType.Fade:
-				transImage.fillAmount = 1.0f;
+				m_transImage.fillAmount = 1.0f;
 				break;
 			default:
-				transImage.fillAmount = 0.0f;
+				m_transImage.fillAmount = 0.0f;
 				break;
 		}
 	}
@@ -531,7 +532,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	bool IsRawImage()
 	{
 		var isRawImage = false;
-		switch (transType)
+		switch (m_transitionType)
 		{
 			case TransitionType.Custom:
 				isRawImage = true;
