@@ -1,31 +1,38 @@
 # TransitionManager [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)<br>
 UnityのUIを使用したシーン遷移のマネージャー<br>
-ImageのImageTypeを変えて色んな遷移方法を実装しています<br>
+ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事が出来ます。<br>
+ルール画像を設定したトランジションも可能。<br>
 
+## Update <br>
+ver 1.1.0:ルール画像でシーン遷移出来るように追加(2018.09.17)<br>
+ver 1.1.1:ルール画像のプレビューを表示するなどインスペクター拡張(2018.09.18)<br>
 
-## シーン遷移のサンプル <br>
-<img src="https://78.media.tumblr.com/14349e6ca31f887e7d8a84703312cdbe/tumblr_p3lwx73LWQ1u4382eo1_1280.gif" alt="シーン遷移サンプル1" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/ef5c3f6ff4c17df92d8bf2ad35cd0467/tumblr_p3lwxkHmiE1u4382eo1_1280.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/1eacd7ba93eaa2ce63350978cff9d7bc/tumblr_p3lwxvaRZW1u4382eo1_1280.gif" alt="シーン遷移サンプル3" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/047f8092db3bd2797ee806804b4fb43c/tumblr_p3lwynxVhg1u4382eo1_1280.gif" alt="シーン遷移サンプル4" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/501edb93fc8c1f3c29371f3d5d46c1e6/tumblr_p3lwyxzqkN1u4382eo1_1280.gif" alt="シーン遷移サンプル5" title="サンプル"><br>
-<img src="https://78.media.tumblr.com/d2894885bdc4ffb8fdf52d5ca09ec381/tumblr_p3lwz7zTk91u4382eo1_1280.gif" alt="シーン遷移サンプル6" title="サンプル"><br>
+## Example <br>
+シーンの遷移の表示例<br>
 
-## 使い方
-1. GameObjectを作成.<br>
-2. "TransitionManager.cs"をAdd Componentする<br>
-<br>
-<img src="https://78.media.tumblr.com/8393804e5f253b6e5f00d6b9a13a6589/tumblr_p3lyieVtxx1u4382eo1_1280.png" alt="シーン遷移サンプル6" title="サンプル"><br>
+### UI_Transition<br>
+<img src="https://78.media.tumblr.com/1a6ae7adbbb33c3a4cfeab020fb5b161/tumblr_pf8f678GVz1u4382eo1_400.gif" alt="シーン遷移サンプル1" title="サンプル"><img src="https://78.media.tumblr.com/72e838e53edbf4d56494e5af5ea74d9f/tumblr_pf8f678GVz1u4382eo2_400.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/cb19b6219ad75b62a7e576b43d2eb040/tumblr_pf8f678GVz1u4382eo3_400.gif" alt="シーン遷移サンプル3" title="サンプル"><img src="https://78.media.tumblr.com/9659dd627bf835c7bda6fb3275004add/tumblr_pf8f678GVz1u4382eo4_400.gif" alt="シーン遷移サンプル4" title="サンプル"><br>
+<img src="https://78.media.tumblr.com/88f456d4dd9f56744a124fb7a59f386d/tumblr_pf8f678GVz1u4382eo5_400.gif" alt="シーン遷移サンプル5" title="サンプル">
 
-### インスペクターの設定 
+### Fade Transition<br>
+<img src="https://78.media.tumblr.com/1fdbab5844b8df4bdb77b7e4eaf49954/tumblr_pf8f678GVz1u4382eo7_400.gif" alt="シーン遷移サンプル6" title="サンプル">
+
+### Rule Texture Transition<br>
+<img src="https://78.media.tumblr.com/dbee1b043471c699243e7b7d5ebe182b/tumblr_pf8f678GVz1u4382eo6_400.gif" alt="シーン遷移サンプル7" title="サンプル">
+
+## InspectorSetting
 | プロパティ | 説明 |
 |:---|:---|
-| TransitionTime | シーンの遷移時間 |
-| TransitionColor | シーン遷移時の背景の色 |
-| TransitionType | シーン遷移の方法 |
-| AnimationCurve| シーン遷移のアニメーションカーブ |
+| TransitionType | 遷移の種類 |
+| Duration | 遷移時間 |
+| TexColor | 背景の色 |
+| AnimCurve| 遷移時間のカーブ |
 
-### スクリプトの実装
+<img src="https://78.media.tumblr.com/0075610ec93360c88caa2c9cbf627d2d/tumblr_pf8g7lwe8b1u4382eo1_400.gif" alt="シーン遷移サンプル7" title="サンプル">
+
+## SampleScript
+
 ```csharp
 public class Test
 {
@@ -36,8 +43,8 @@ public class Test
 }
 ```
 
-## 開発環境
-Unity 2017.3.0f3<br>
+## UnityVersion
+Unity 2018.1.5f1<br>
 
 ## License
 See [LICENSE](/LICENSE).
