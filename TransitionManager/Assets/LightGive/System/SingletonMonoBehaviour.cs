@@ -4,6 +4,8 @@ namespace LightGive
 {
 	public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 	{
+		public bool isDontDestroy;
+
 		private static T instance;
 		public static T Instance
 		{
@@ -23,8 +25,8 @@ namespace LightGive
 
 		protected virtual void Awake()
 		{
-            if (CheckInstance())
-                DontDestroyOnLoad(this.gameObject);
+			if (CheckInstance() && isDontDestroy)
+				DontDestroyOnLoad(this.gameObject);
 		}
 
 		protected bool CheckInstance()

@@ -38,6 +38,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	public const string ShaderParamTextureGradation = "_Gradation";
 	public const string ShaderParamFloatInvert = "_Invert";
 	public const string ShaderParamFloatCutoff = "_Cutoff";
+	public const string ShaderParamColor = "_Color";
 	private const float DefaultTransitionTime = 1.0f;
 
 	[SerializeField]
@@ -51,8 +52,9 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	[SerializeField]
 	private AnimationCurve m_animCurve = AnimationCurve.Linear(0, 0, 1, 1);
 	[SerializeField]
+	private Shader m_transShader;
+	[SerializeField]
 	private bool m_isInvert = false;
-
 
 	private int m_texCount = 0;
 	private bool m_isTransition = false;
@@ -61,10 +63,13 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	private RawImage m_transRawImage;
 	private CanvasScaler m_baseCanvasScaler;
 	private Canvas m_baseCanvas;
-	private Shader m_transShader;
 
 
-	//遷移方法の種類をまとめたもの
+	public bool isRawImage { get { return (m_transitionType == TransitionType.Custom); } }
+
+	/// <summary>
+	/// 遷移方法の種類
+	/// </summary>
 	public enum TransitionType
 	{
 		Fade = 0,
@@ -95,6 +100,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 
 	protected override void Awake()
 	{
+		base.isDontDestroy = true;
 		base.Awake();
 		Init();
 	}
@@ -127,13 +133,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		m_transImage.sprite = m_transitionSprite;
 		m_transImage.type = Image.Type.Filled;
 		m_transImage.fillAmount = 1.0f;
-
-		m_transShader = Shader.Find(TransitionShaderName);
-		if (m_transShader == null)
-		{
-			Debug.Log("I could not find a shader.");
-			m_transitionType = TransitionType.Fade;
-		}
 
 		switch (m_transitionType)
 		{
@@ -223,60 +222,78 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// <summary>
 	/// シーンを遷移する
 	/// </summary>
-	/// <param name="_scenename">遷移先シーン名</param>
-	public void LoadLevel(string _scenename)
+	/// <param name="_sceneName">遷移先シーン名</param>
+	public void LoadScene(string _sceneName)
 	{
-		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(_scenename), m_duration));
+		StartCoroutine(TransitionAction(() => SceneManager.LoadScene(_sceneName), m_duration));
 	}
 
 	/// <summary>
 	/// シーンを遷移する
 	/// </summary>
-	/// <param name="_scenename">遷移先シーン名</param>
-	/// <param name="_transtime">遷移時間</param>
-	public void LoadLevel(string _scenename, float _transtime)
+	/// <param name="_sceneName">遷移先シーン名</param>
+	/// <param name="_duration">遷移時間</param>
+	public void LoadScene(string _sceneName, float _duration)
 	{
-		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(_scenename), _transtime));
+		StartCoroutine(TransitionAction(() => SceneManager.LoadScene(_sceneName), _duration));
+	}
+
+	/// <summary>
+	/// シーンを遷移する
+	/// </summary>
+	/// <param name="_sceneName">遷移先シーン名</param>
+	/// <param name="_duration">遷移時間</param>
+	/// <param name="_transitionColor">トランジションの色</param>
+	public void LoadScene(string _sceneName, float _duration, Color _transitionColor)
+	{
+		StartCoroutine
+		(
+			TransitionAction
+			(
+				() => SceneManager.LoadScene(_sceneName),
+				_duration
+			)
+		);
+	}
+
+
+	/// <summary>
+	/// シーン再読み込み
+	/// </summary>
+	/// <param name="_duration">遷移時間</param>
+	public void ReLoadScene(float _duration)
+	{
+		StartCoroutine(TransitionAction(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), _duration));
 	}
 
 	/// <summary>
 	/// シーン再読み込み
 	/// </summary>
-	/// <param name="_transtime">遷移時間</param>
-	public void ReLoadLevel(float _transtime)
+	public void ReLoadScene()
 	{
-		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), _transtime));
-	}
-
-	/// <summary>
-	/// シーン再読み込み
-	/// </summary>
-	public void ReLoadLevel()
-	{
-		StartCoroutine(StartTransitionEffect(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), m_duration));
+		StartCoroutine(TransitionAction(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), m_duration));
 	}
 
 	/// <summary>
 	/// アプリを終了する
 	/// </summary>
 	/// <param name="_transtime">遷移時間</param>
-	public void Quit(float _transtime)
+	public void ApplicationQuit(float _transtime)
 	{
-		StartCoroutine(StartTransitionEffect(() => Application.Quit(), _transtime));
+		StartCoroutine(TransitionAction(() => Application.Quit(), _transtime));
 	}
 
 	/// <summary>
 	/// アプリを終了する
 	/// </summary>
-	public void Quit()
+	public void ApplicationQuit()
 	{
-		StartCoroutine(StartTransitionEffect(() => Application.Quit(), m_duration));
+		StartCoroutine(TransitionAction(() => Application.Quit(), m_duration));
 	}
 
 	public void StartTransitonEffect(float _transtime, UnityAction _act)
 	{
-		StartCoroutine(StartTransitionEffect(_act, _transtime));
-
+		StartCoroutine(TransitionAction(_act, _transtime));
 	}
 
 	/// <summary>
@@ -329,7 +346,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		transImageRectTransfrm.sizeDelta = Vector3.zero;
 	}
 
-
 	/// <summary>
 	/// RawImageを生成する
 	/// </summary>
@@ -363,7 +379,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	Texture2D CreateTexture2D()
 	{
 		var tex = new Texture2D(32, 32, TextureFormat.RGB24, false);
-
 		for (int i = 0; i < tex.width; i++)
 		{
 			for (int ii = 0; ii < tex.height; ii++)
@@ -371,7 +386,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 				tex.SetPixel(i, ii, Color.white);
 			}
 		}
-
 		return tex;
 	}
 
@@ -379,9 +393,9 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	/// シーン遷移用コルーチン
 	/// </summary>
 	/// <returns></returns>
-	private IEnumerator StartTransitionEffect(UnityAction _act, float _transtime)
+	private IEnumerator TransitionAction(UnityAction _act, float _transtime)
 	{
-		//コルーチンが動いている時、中断
+		//コルーチンが動いている時は中断
 		if (m_isTransition)
 			yield break;
 
@@ -417,7 +431,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 
 		m_isTransition = false;
 
-		if (IsRawImage())
+		if (isRawImage)
 		{
 			SceneTransitionDirection(0.0f);
 			m_transRawImage.gameObject.SetActive(false);
@@ -430,16 +444,13 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	}
 
 
-
-
 	/// <summary>
 	/// アニメーションカーブを反転させる
 	/// </summary>
 	/// <returns>反転させたアニメーションカーブ</returns>
-	AnimationCurve FlipCurve()
+	private AnimationCurve FlipCurve()
 	{
 		AnimationCurve newCurve = new AnimationCurve();
-
 		for (int i = 0; i < m_animCurve.length; i++)
 		{
 			Keyframe key = m_animCurve[i];
@@ -448,7 +459,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 			key.outTangent = key.outTangent * -1f;
 			newCurve.AddKey(key);
 		}
-
 		return newCurve;
 	}
 
@@ -489,7 +499,7 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 				break;
 		}
 
-		if (IsRawImage())
+		if (isRawImage)
 		{
 			m_transRawImage.gameObject.SetActive(true);
 		}
@@ -516,22 +526,4 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 		}
 	}
 
-	/// <summary>
-	/// RawImageを使っているか
-	/// </summary>
-	/// <returns><c>true</c>, if raw image was ised, <c>false</c> otherwise.</returns>
-	bool IsRawImage()
-	{
-		var isRawImage = false;
-		switch (m_transitionType)
-		{
-			case TransitionType.Custom:
-				isRawImage = true;
-				break;
-			default:
-				isRawImage = false;
-				break;
-		}
-		return isRawImage;
-	}
 }

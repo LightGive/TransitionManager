@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/LightGive/Scripts/Managers/TransitionManager/Example/Scenes/Example1.unity
+    path: Assets/LightGive/Managers/TransitionManager/Example/Scenes/Example1.unity
     guid: 5bb2726f3acb449e1ad202cfe814e2d8
   - enabled: 1
-    path: Assets/LightGive/Scripts/Managers/TransitionManager/Example/Scenes/Example2.unity
+    path: Assets/LightGive/Managers/TransitionManager/Example/Scenes/Example2.unity
     guid: 96d105cf8aee1450b917bfe0f995b7a4
   m_configObjects: {}
