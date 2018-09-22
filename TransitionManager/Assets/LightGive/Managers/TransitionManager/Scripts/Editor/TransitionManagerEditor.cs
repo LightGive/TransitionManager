@@ -11,7 +11,7 @@ namespace LightGive
 	{
 		private Vector3 m_centerPosition;
 		private Material m_previewMat;
-		private float m_lerp;
+		private float m_lerp = 0.5f;
 
 		private SerializedProperty m_transitionTypeProp;
 		private SerializedProperty m_durationProp;
@@ -157,6 +157,8 @@ namespace LightGive
 			m_previewMat.SetTexture(TransitionManager.ShaderParamTextureGradation, (Texture)m_ruleTexProp.objectReferenceValue);
 			m_previewMat.SetColor(TransitionManager.ShaderParamColor, m_texColorProp.colorValue);
 			m_previewMat.SetFloat(TransitionManager.ShaderParamFloatInvert, m_isInvertProp.boolValue ? 1.0f : 0.0f);
+			m_previewMat.SetFloat(TransitionManager.ShaderParamFloatCutoff, m_lerp);
+
 		}
 	}
 }

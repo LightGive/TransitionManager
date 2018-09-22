@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Example1 : MonoBehaviour
 {
-    [SerializeField]
-    private string sceneName;
+	[SerializeField]
+	private string sceneName;
 
-    public void OnButtonDown()
-    {
-        TransitionManager.Instance.LoadLevel(sceneName, 1.0f);
-    }
+	public void OnButtonDown()
+	{
+		TransitionManager.Instance.LoadScene(sceneName, 1.0f);
+	}
 }

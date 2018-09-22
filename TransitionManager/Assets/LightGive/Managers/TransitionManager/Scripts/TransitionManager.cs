@@ -212,10 +212,8 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 				m_transImage.fillOrigin = (int)Image.Origin360.Bottom;
 				break;
 		}
-
 		m_transRawImage.gameObject.SetActive(false);
 		m_transImage.gameObject.SetActive(false);
-
 	}
 
 
@@ -237,25 +235,6 @@ public class TransitionManager : LightGive.SingletonMonoBehaviour<TransitionMana
 	{
 		StartCoroutine(TransitionAction(() => SceneManager.LoadScene(_sceneName), _duration));
 	}
-
-	/// <summary>
-	/// シーンを遷移する
-	/// </summary>
-	/// <param name="_sceneName">遷移先シーン名</param>
-	/// <param name="_duration">遷移時間</param>
-	/// <param name="_transitionColor">トランジションの色</param>
-	public void LoadScene(string _sceneName, float _duration, Color _transitionColor)
-	{
-		StartCoroutine
-		(
-			TransitionAction
-			(
-				() => SceneManager.LoadScene(_sceneName),
-				_duration
-			)
-		);
-	}
-
 
 	/// <summary>
 	/// シーン再読み込み
