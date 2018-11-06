@@ -56,7 +56,6 @@ MonoBehaviour:
   m_defaultFlashWhiteDuration: 0.05
   m_defaultFlashColor: {r: 1, g: 1, b: 1, a: 1}
   m_defaultEffectType: 0
-  m_effectType: 0
   m_defaultTransDuration: 1
   m_ruleTex: {fileID: 0}
   m_defaultEffectColor: {r: 0, g: 0, b: 0, a: 1}

@@ -54,8 +54,6 @@ public class TransitionManager : SingletonMonoBehaviour<TransitionManager>
 	[SerializeField]
 	private EffectType m_defaultEffectType = EffectType.Fade;
 	[SerializeField]
-	private EffectType m_effectType;
-	[SerializeField]
 	private float m_defaultTransDuration = 1.0f;
 	[SerializeField]
 	private Texture m_ruleTex;
@@ -142,7 +140,6 @@ public class TransitionManager : SingletonMonoBehaviour<TransitionManager>
 		m_transImage.sprite = m_transitionSprite;
 		m_transImage.type = Image.Type.Filled;
 		m_transImage.fillAmount = 1.0f;
-		m_effectType = m_defaultEffectType;
 
 		m_transImageFlash.gameObject.name = "FlashImage";
 		m_transImageFlash.sprite = m_transitionSprite;
