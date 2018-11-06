@@ -45,7 +45,7 @@ public class Test
 {
     void Start()
     {
-        TransitionManager.Instance.LoadLevel("SceneName");
+        TransitionManager.Instance.LoadScene("SceneName");
     }
 }
 ```
