@@ -35,14 +35,7 @@ You can also see what kind of action you will take from the link below.<br>
 <img src="https://78.media.tumblr.com/dbee1b043471c699243e7b7d5ebe182b/tumblr_pf8f678GVz1u4382eo6_400.gif" alt="シーン遷移サンプル7" title="サンプル">
 
 ## InspectorSetting
-| プロパティ | 説明 |
-|:---|:---|
-| TransitionType | 遷移の種類 |
-| Duration | 遷移時間 |
-| TexColor | 背景の色 |
-| AnimCurve| 遷移時間のカーブ |
-
-<img src="https://78.media.tumblr.com/0075610ec93360c88caa2c9cbf627d2d/tumblr_pf8g7lwe8b1u4382eo1_400.gif" alt="シーン遷移サンプル7" title="サンプル">
+<img src="https://66.media.tumblr.com/2cbd3c929bd64ffadc7bbea41c6fb0f3/tumblr_phshytOlSw1u4382eo1_400.gif">
 
 ## SampleScript
 
