@@ -52,10 +52,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 0
-  m_transitionType: 17
-  m_duration: 1
-  m_ruleTex: {fileID: 2800000, guid: 8211d11f20f21418891f6d9f7aba10b0, type: 3}
-  m_texColor: {r: 0, g: 0, b: 0, a: 1}
+  m_defaultFlashDuration: 0.1
+  m_defaultFlashWhiteDuration: 0.05
+  m_defaultFlashColor: {r: 1, g: 1, b: 1, a: 1}
+  m_defaultEffectType: 0
+  m_effectType: 0
+  m_defaultTransDuration: 1
+  m_ruleTex: {fileID: 0}
+  m_defaultEffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_animCurve:
     serializedVersion: 2
     m_Curve:
@@ -80,5 +84,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_transShader: {fileID: 4800000, guid: 8900d31a0f4dc5a48aeeae6392bbdf07, type: 3}
-  m_isInvert: 1
+  m_transShader: {fileID: 0}
+  m_isInvert: 0
