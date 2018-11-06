@@ -3,7 +3,8 @@ It is a manager of scene transitions using Unity's uGUI.<br>
 You can make 16 kinds of + Image fade transition effect by changing ImageType of Image.<br>
 We also made it possible to use the production with the rule image set.<br>
 It is confirmed in iOS, Android, WebGL.<br>
-You can also see what kind of action you will take from the link below.<br>
+Inspector extension is also done and it is easy to use<br>
+You can also see what kind of action you will take from the link below.<br><br>
 [TransitionManagerExample](https://lightgive.github.io/MyPage/Examples/TransitionManagerExample/index.html)<br>
 
 ## Update <br>
