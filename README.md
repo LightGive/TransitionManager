@@ -1,15 +1,21 @@
 # TransitionManager [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)<br>
-UnityのUIを使用したシーン遷移のマネージャー<br>
-ImageのImageTypeを変えた16種類＋フェードの遷移演出をする事が出来ます。<br>
-ルール画像を設定したトランジションも追加しました。<br>
-iOS、Androidでも動作確認済み。<br>
+It is a manager of scene transitions using Unity's uGUI.<br>
+You can make 16 kinds of + Image fade transition effect by changing ImageType of Image.<br>
+We also made it possible to use the production with the rule image set.<br>
+It is confirmed in iOS, Android, WebGL.<br>
+Inspector extension is also done and it is easy to use<br>
+You can also see what kind of action you will take from the link below.<br><br>
+[TransitionManagerExample](https://lightgive.github.io/MyPage/Examples/TransitionManagerExample/index.html)<br>
 
 ## Update <br>
 <dl>
-  <dt>ver1.1.0(2018.09.17)</dt>
-  <dd>・ルール画像でシーン遷移出来るように追加</dd>
+  <dt>ver1.2.0(2018.11.07)</dt>
+    <dd>・Added Flash function</dd>
+    <dd>・Change to LoadScene so that it can be set with argument instead of default value</dd>
   <dt>ver1.1.1(2018.09.18)</dt>
-  <dd>・ルール画像のプレビューを表示するなどインスペクター拡張</dd>
+  <dd>・Inspector extension such as displaying preview of rule image</dd>
+  <dt>ver1.1.0(2018.09.17)</dt>
+  <dd>・Added so that scene transition can be made with rule image</dd>
 </dl>
 
 ## Download (UnityPackage)
@@ -17,7 +23,6 @@ iOS、Androidでも動作確認済み。<br>
 [TransitionManager(1.1.0)_NoExample](https://www.dropbox.com/s/qtvzge317r3pf3q/TransitionManager%281.1.0%29_NoExample.unitypackage?dl=0"SystemCalc(1.0.1)_IncludedExample")<br>
 
 ## Example <br>
-シーンの遷移の表示例<br>
 
 ### UI_Transition<br>
 <img src="https://78.media.tumblr.com/1a6ae7adbbb33c3a4cfeab020fb5b161/tumblr_pf8f678GVz1u4382eo1_400.gif" alt="シーン遷移サンプル1" title="サンプル"><img src="https://78.media.tumblr.com/72e838e53edbf4d56494e5af5ea74d9f/tumblr_pf8f678GVz1u4382eo2_400.gif" alt="シーン遷移サンプル2" title="サンプル"><br>
@@ -31,14 +36,7 @@ iOS、Androidでも動作確認済み。<br>
 <img src="https://78.media.tumblr.com/dbee1b043471c699243e7b7d5ebe182b/tumblr_pf8f678GVz1u4382eo6_400.gif" alt="シーン遷移サンプル7" title="サンプル">
 
 ## InspectorSetting
-| プロパティ | 説明 |
-|:---|:---|
-| TransitionType | 遷移の種類 |
-| Duration | 遷移時間 |
-| TexColor | 背景の色 |
-| AnimCurve| 遷移時間のカーブ |
-
-<img src="https://78.media.tumblr.com/0075610ec93360c88caa2c9cbf627d2d/tumblr_pf8g7lwe8b1u4382eo1_400.gif" alt="シーン遷移サンプル7" title="サンプル">
+<img src="https://66.media.tumblr.com/2cbd3c929bd64ffadc7bbea41c6fb0f3/tumblr_phshytOlSw1u4382eo1_400.gif">
 
 ## SampleScript
 
@@ -47,13 +45,13 @@ public class Test
 {
     void Start()
     {
-        TransitionManager.Instance.LoadLevel("SceneName");
+        TransitionManager.Instance.LoadScene("SceneName");
     }
 }
 ```
 
 ## UnityVersion
-Unity 2018.1.5f1<br>
+Unity 2018.2.8f1<br>
 
 ## License
 See [LICENSE](/LICENSE).
