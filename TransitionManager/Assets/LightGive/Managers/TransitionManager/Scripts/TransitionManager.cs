@@ -236,11 +236,11 @@ public class TransitionManager : SingletonMonoBehaviour<TransitionManager>
 		if (m_isTransition)
 			yield break;
 
-		if (m_transShader == null)
-		{
-			_effectType = EffectType.Fade;
-			Debug.LogWarning("Since TransitionShader does not exist, Custom of EffectType can not be used. EffectType has been changed to Fade.");
-		}
+		//if (m_transShader == null)
+		//{
+		//	_effectType = EffectType.Fade;
+		//	Debug.LogWarning("Since TransitionShader does not exist, Custom of EffectType can not be used. EffectType has been changed to Fade.");
+		//}
 
 		m_isTransition = true;
 		SceneTransitionInit(_effectColor, _effectType);
