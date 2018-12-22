@@ -18,10 +18,6 @@ You can also see what kind of action you will take from the link below.<br><br>
   <dd>・Added so that scene transition can be made with rule image</dd>
 </dl>
 
-## Download (UnityPackage)
-[TransitionManager(1.1.0)_IncludedExample](https://www.dropbox.com/s/330z0xg04u5o008/TransitionManager%281.1.0%29_IncludedExample.unitypackage?dl=0"SystemCalc(1.0.1)_IncludedExample")<br>
-[TransitionManager(1.1.0)_NoExample](https://www.dropbox.com/s/qtvzge317r3pf3q/TransitionManager%281.1.0%29_NoExample.unitypackage?dl=0"SystemCalc(1.0.1)_IncludedExample")<br>
-
 ## Example <br>
 
 ### UI_Transition<br>
